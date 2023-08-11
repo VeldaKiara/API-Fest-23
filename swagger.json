@@ -1,0 +1,458 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "API-Fest-KE-23",
+    "version" : "1.0.0",
+    "description" : "This is a test API for managing API Fest swag to demo how to create an API spec with atleast one endpoint. This"
+  },
+  "paths" : {
+    "/swags" : {
+      "get" : {
+        "summary" : "Get all swags",
+        "operationId" : "getSwags",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Swag"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Create a new swag",
+        "operationId" : "createSwag",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Swag"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Swag created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Swag"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "bad_request" : {
+                    "value" : {
+                      "message" : "The request body is invalid.",
+                      "code" : 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "unauthorized" : {
+                    "value" : {
+                      "message" : "The user is not authorized to access this resource.",
+                      "code" : 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "An unexpected error occurred while processing the request.",
+                      "code" : 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/swag/{id}" : {
+      "get" : {
+        "summary" : "Get a swag by ID",
+        "operationId" : "getSwagById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Swag"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "swag not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "swag not found.",
+                      "code" : 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "An unexpected error occurred while processing the request.",
+                      "code" : 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update a Swag by ID",
+        "operationId" : "updateSwagById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Swag"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Swag updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Swag"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Bad request.",
+                      "code" : 400
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Unauthorized.",
+                      "code" : 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Access is forbidden.",
+                      "code" : 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Swag not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "swag not found.",
+                      "code" : 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "An unexpected error occurred while processing the request.",
+                      "code" : 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Delete a swag by ID",
+        "operationId" : "deleteSwagById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Swag deleted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Swag has been deleted.",
+                      "code" : 204
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Unauthorized to view resource",
+                      "code" : 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "Access is forbidden.",
+                      "code" : 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Swag not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "swag not found.",
+                      "code" : 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal server error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Error"
+                },
+                "examples" : {
+                  "internal_server_error" : {
+                    "value" : {
+                      "message" : "An unexpected error occurred while processing the request.",
+                      "code" : 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Swag" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number"
+          },
+          "description" : {
+            "type" : "string"
+          }
+        },
+        "example" : [ {
+          "id" : 1,
+          "name" : "Swag 1",
+          "price" : 9.99,
+          "description" : "Example description for Swag "
+        }, {
+          "id" : 2,
+          "name" : "Swag 2",
+          "price" : 19.99,
+          "description" : "Example description for Swag 2"
+        } ]
+      },
+      "Error" : {
+        "type" : "object",
+        "description" : "Represents an HTTP error",
+        "properties" : {
+          "error_code" : {
+            "type" : "number"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "docs" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  },
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/veldakarimi/APIFestKE23/1.0.0"
+  }, {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/veldakarimi/oscafest23/1.0.0"
+  } ]
+}
