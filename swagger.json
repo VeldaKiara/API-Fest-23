@@ -107,7 +107,7 @@
         }
       }
     },
-    "/swag/{id}" : {
+    "/swags/{id}" : {
       "get" : {
         "summary" : "Get a swag by ID",
         "operationId" : "getSwagById",
