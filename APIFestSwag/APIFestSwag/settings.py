@@ -14,6 +14,7 @@ from pathlib import Path
 import environ
 import os
 
+
 # env var
 env = environ.Env()
 environ.Env.read_env()
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'swags',
     'rest_framework',
     'rest_framework_simplejwt',
+   
 ]
 
 #add Rest framework + jwt, auth set up 
@@ -91,13 +93,22 @@ WSGI_APPLICATION = 'APIFestSwag.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'wda-sample',
+        'USER': env('USER'),
+        'PASSWORD': env('PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
